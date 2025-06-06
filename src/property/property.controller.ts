@@ -4,8 +4,10 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
+  Query,
 } from '@nestjs/common';
 
 @Controller('property')
@@ -29,7 +31,8 @@ export class PropertyController {
 
   // 1- transform pipe
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id) {
+  findOne(@Param('id', ParseIntPipe) id, @Query('sort', ParseBoolPipe) sort) {
+    console.log(typeof sort);
     return id;
   }
   @Post()
