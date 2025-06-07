@@ -40,33 +40,21 @@ export class PropertyController {
     return id;
   }
   @Post()
-  @UsePipes(
-    new ValidationPipe({
-      transform: true, // <-- required to make groups work
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      groups: ['creat'],
-      always: true,
-    }),
-  )
+  // @UsePipes(
+  //   new ValidationPipe({
+  //     transform: true, // <-- required to make groups work
+  //     whitelist: true,
+  //     forbidNonWhitelisted: true,
+  //     groups: ['creat'],
+  //     always: true,
+  //   }),
+  // )
   create(@Body() body: CreatePropertyDto) {
     return body;
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
-    @Body(
-      new ValidationPipe({
-        transform: true,
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        groups: ['update'],
-        always: true,
-      }),
-    )
-    body: CreatePropertyDto,
-  ) {
+  update(@Param('id') id: string, @Body() body: CreatePropertyDto) {
     return body;
   }
 }
