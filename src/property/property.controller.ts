@@ -13,6 +13,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
+import { IdParamDto } from './dto/idParam.dt';
 
 @Controller('property')
 export class PropertyController {
@@ -49,12 +50,17 @@ export class PropertyController {
   //     always: true,
   //   }),
   // )
-  create(@Body() body: CreatePropertyDto) {
+  create(
+    @Body(new ValidationPipe({ groups: ['create'] })) body: CreatePropertyDto,
+  ) {
     return body;
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: CreatePropertyDto) {
+  update(
+    @Param() param: IdParamDto,
+    @Body(new ValidationPipe({ groups: ['update'] })) body: CreatePropertyDto,
+  ) {
     return body;
   }
 }
