@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Param,
@@ -14,6 +15,7 @@ import {
 } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 import { IdParamDto } from './dto/idParam.dt';
+import { PareseIdPipe } from './pipes/parseIdPipe';
 
 @Controller('property')
 export class PropertyController {
@@ -62,5 +64,9 @@ export class PropertyController {
     @Body(new ValidationPipe({ groups: ['update'] })) body: CreatePropertyDto,
   ) {
     return body;
+  }
+  @Delete(':id')
+  delete(@Param('id', PareseIdPipe) id) {
+    return id;
   }
 }
